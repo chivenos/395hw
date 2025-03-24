@@ -25,14 +25,14 @@ statement:
 
 expr:
     INTEGER { $$ = $1; }
-    | '(' expr ')' { $$ = $2; } /* Parantezlere öncelik veriyoruz */
+    | '(' expr ')' { $$ = $2; }
     | expr '+' expr { $$ = $1 + $3; }
     | expr '-' expr { $$ = $1 - $3; }
     | expr '*' expr { $$ = $1 * $3; }
     | expr POW expr { $$ = pow($1, $3); }
     | expr '/' expr {
         if ($3 == 0) {
-            yyerror("Hata: Sıfıra bölme!");
+            yyerror("Sıfıra bölme hatası!");
             exit(EXIT_FAILURE);
         } else {
             $$ = $1 / $3;
